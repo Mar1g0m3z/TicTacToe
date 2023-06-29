@@ -1,7 +1,20 @@
 import React, { useState } from "react";
 import "./App.css";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-const App = () => {
+const Home = () => {
+  return (
+    <div className="container">
+      <h1 className="title">Tic-Tac-Toe</h1>
+      <p className="description">Welcome to the Tic-Tac-Toe game!</p>
+      <Link to="/game" className="start-button">
+        Start Game
+      </Link>
+    </div>
+  );
+};
+
+const Game = () => {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [currentPlayer, setCurrentPlayer] = useState("X");
   const [winner, setWinner] = useState(null);
@@ -62,7 +75,6 @@ const App = () => {
 
   return (
     <div className="container">
-      <h1 className="title">Tic-Tac-Toe</h1>
       <div className="board">
         <div className="row">
           <div className="cell-container">{renderCell(0)}</div>
@@ -86,6 +98,17 @@ const App = () => {
         Reset
       </button>
     </div>
+  );
+};
+
+const App = () => {
+  return (
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/game" component={Game} />
+      </Switch>
+    </Router>
   );
 };
 
